@@ -282,6 +282,12 @@ namespace WebSocketSharp
             init();
         }
 
+        private Func<NameValueCollection> _generateCustomHeaders;
+        public WebSocket(string url, Func<NameValueCollection> generateCustomHeaders) : this(url)
+        {
+            _generateCustomHeaders = generateCustomHeaders;
+        }
+
         #endregion
 
         #region Internal Properties
@@ -1481,6 +1487,15 @@ namespace WebSocketSharp
 
             if (_cookies.Count > 0)
                 ret.SetCookies(_cookies);
+
+            if (_generateCustomHeaders != null)
+            {
+                var customHeaders = _generateCustomHeaders();
+                foreach (string key in customHeaders)
+                {
+                    headers[key] = customHeaders[key];
+                }
+            }
 
             return ret;
         }
