@@ -44,7 +44,7 @@ using System;
 using System.Collections.Specialized;
 using System.Text;
 
-namespace WebSocketSharp.Net
+namespace Funday.WebSocketSharp.Net
 {
   internal sealed class QueryStringCollection : NameValueCollection
   {

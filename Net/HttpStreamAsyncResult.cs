@@ -40,7 +40,7 @@
 using System;
 using System.Threading;
 
-namespace WebSocketSharp.Net
+namespace Funday.WebSocketSharp.Net
 {
   internal class HttpStreamAsyncResult : IAsyncResult
   {

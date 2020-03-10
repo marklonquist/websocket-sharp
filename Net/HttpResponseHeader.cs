@@ -37,7 +37,7 @@
  */
 #endregion
 
-namespace WebSocketSharp.Net
+namespace Funday.WebSocketSharp.Net
 {
   /// <summary>
   /// Contains the HTTP headers that can be specified in a server response.

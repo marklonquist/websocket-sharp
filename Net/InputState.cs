@@ -39,7 +39,7 @@
 
 using System;
 
-namespace WebSocketSharp.Net
+namespace Funday.WebSocketSharp.Net
 {
   internal enum InputState
   {

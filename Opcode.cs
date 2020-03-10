@@ -28,7 +28,7 @@
 
 using System;
 
-namespace WebSocketSharp
+namespace Funday.WebSocketSharp
 {
   /// <summary>
   /// Indicates the WebSocket frame type.

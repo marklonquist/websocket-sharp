@@ -32,9 +32,9 @@ using System.Collections.Specialized;
 using System.IO;
 using System.Text;
 using System.Threading;
-using WebSocketSharp.Net;
+using Funday.WebSocketSharp.Net;
 
-namespace WebSocketSharp
+namespace Funday.WebSocketSharp
 {
   internal abstract class HttpBase
   {

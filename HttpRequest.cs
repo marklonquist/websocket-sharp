@@ -37,9 +37,9 @@ using System;
 using System.Collections.Specialized;
 using System.IO;
 using System.Text;
-using WebSocketSharp.Net;
+using Funday.WebSocketSharp.Net;
 
-namespace WebSocketSharp
+namespace Funday.WebSocketSharp
 {
   internal class HttpRequest : HttpBase
   {

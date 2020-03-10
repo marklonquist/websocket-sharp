@@ -52,9 +52,9 @@ using System.IO;
 using System.IO.Compression;
 using System.Net.Sockets;
 using System.Text;
-using WebSocketSharp.Net;
+using Funday.WebSocketSharp.Net;
 
-namespace WebSocketSharp
+namespace Funday.WebSocketSharp
 {
   /// <summary>
   /// Provides a set of static methods for websocket-sharp.

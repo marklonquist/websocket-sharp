@@ -52,7 +52,7 @@ using System.Security.Principal;
 using System.Threading;
 
 // TODO: Logging.
-namespace WebSocketSharp.Net
+namespace Funday.WebSocketSharp.Net
 {
   /// <summary>
   /// Provides a simple, programmatically controlled HTTP listener.
