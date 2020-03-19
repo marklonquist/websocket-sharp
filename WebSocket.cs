@@ -97,7 +97,6 @@ namespace Funday.WebSocketSharp
         private bool _inContinuation;
         private volatile bool _inMessage;
         private volatile Logger _logger;
-        private static readonly int _maxRetryCountForConnect;
         private Action<MessageEventArgs> _message;
         private Queue<MessageEventArgs> _messageEventQueue;
         private uint _nonceCount;
@@ -111,7 +110,6 @@ namespace Funday.WebSocketSharp
         private Uri _proxyUri;
         private volatile WebSocketState _readyState;
         private ManualResetEvent _receivingExited;
-        private int _retryCountForConnect;
         private bool _secure;
         private ClientSslConfiguration _sslConfig;
         private Stream _stream;
@@ -154,7 +152,6 @@ namespace Funday.WebSocketSharp
 
         static WebSocket()
         {
-            _maxRetryCountForConnect = 10;
             EmptyBytes = new byte[0];
             FragmentLength = 1016;
             RandomNumber = new RNGCryptoServiceProvider();
@@ -1381,17 +1378,6 @@ namespace Funday.WebSocketSharp
                     return false;
                 }
 
-                if (_retryCountForConnect > _maxRetryCountForConnect)
-                {
-                    var msg = "An opportunity for reconnecting has been lost.";
-                    _logger.Error(msg);
-
-                    msg = "An interruption has occurred while attempting to connect.";
-                    error(msg, null);
-
-                    return false;
-                }
-
                 _readyState = WebSocketState.Connecting;
 
                 try
@@ -1400,8 +1386,6 @@ namespace Funday.WebSocketSharp
                 }
                 catch (Exception ex)
                 {
-                    _retryCountForConnect++;
-
                     _logger.Fatal(ex.Message);
                     _logger.Debug(ex.ToString());
 
@@ -1411,7 +1395,6 @@ namespace Funday.WebSocketSharp
                     return false;
                 }
 
-                _retryCountForConnect = 1;
                 _readyState = WebSocketState.Open;
 
                 return true;
@@ -3514,12 +3497,6 @@ namespace Funday.WebSocketSharp
                 throw new InvalidOperationException(msg);
             }
 
-            if (_retryCountForConnect > _maxRetryCountForConnect)
-            {
-                var msg = "A series of reconnecting has failed.";
-                throw new InvalidOperationException(msg);
-            }
-
             if (connect())
                 open();
         }
@@ -3564,12 +3541,6 @@ namespace Funday.WebSocketSharp
             if (_readyState == WebSocketState.Closing)
             {
                 var msg = "The close process is in progress.";
-                throw new InvalidOperationException(msg);
-            }
-
-            if (_retryCountForConnect > _maxRetryCountForConnect)
-            {
-                var msg = "A series of reconnecting has failed.";
                 throw new InvalidOperationException(msg);
             }
 
